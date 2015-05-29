@@ -7,7 +7,7 @@
 
 #-123.0137, 37.6040, -122.3549, 37.8324
 
-import argparse, numpy, csv
+import argparse, numpy, csv, get_nghd
 #import util.util, util.neighborhoods, util.census
 
 if __name__ == '__main__':

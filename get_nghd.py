@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-import shapely, geojson
+import geojson, shapely.geometry
 
 #pittsburgh_outline = None
 #nghds = []
@@ -9,7 +9,7 @@ def load_nghds(neighborhoods_filename):
     neighborhoods = geojson.load(open(neighborhoods_filename))
     nghds = neighborhoods['features']
     for nghd in nghds:
-        nghd['shape'] = shapely.geometry.asShape(nghd.geometry)
+        nghd['shape'] = shapely.geometry.asShape(nghd['geometry'])
 #    global pittsburgh_outline
 #    pittsburgh_outline = nghds[0]['shape']
 #    for nghd in nghds:
