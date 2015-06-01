@@ -5,14 +5,18 @@
 # in, just round it off to 3 decimal places and then look it up in the
 # point map.
 
-#-123.0137, 37.6040, -122.3549, 37.8324
+#-122.518, 37.705, -122.350, 37.834
 
 import argparse, numpy, csv, get_nghd
-#import util.util, util.neighborhoods, util.census
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('--granularity', '-g', type=float, default=.001)
+    # Defaults are for SF
+    parser.add_argument('--min_lat', type=float, default=37.705)
+    parser.add_argument('--max_lat', type=float, default=37.834)
+    parser.add_argument('--min_lon', type=float, default=-122.518)
+    parser.add_argument('--max_lon', type=float, default=-122.350)
     parser.add_argument('--outfile', '-o', default='point_map.csv')
     args = parser.parse_args()
 
@@ -22,9 +26,16 @@ if __name__ == '__main__':
 #        'tract', 'block_group', 'block'])
     writer.writeheader()
 
+    min_lat = args.min_lat
+    max_lat = args.max_lat
+    min_lon = args.min_lon
+    max_lon = args.max_lon
+    num_pts = ((max_lon - min_lon)/args.granularity) * ((max_lat - min_lat)/args.granularity)
+    print "Number of points to calculate: " + str(num_pts)
+
     counter = 0
-    for lat in numpy.arange(37.6040, 37.8324, args.granularity):
-        for lon in numpy.arange(-123.0137, -122.3549, args.granularity):
+    for lat in numpy.arange(min_lat, max_lat, args.granularity):
+        for lon in numpy.arange(min_lon, max_lon, args.granularity):
             lat = round(lat, 3)
             lon = round(lon, 3)
             nghd = get_nghd.get_neighborhood_name(nghds, lon, lat)
