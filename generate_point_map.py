@@ -20,7 +20,8 @@ if __name__ == '__main__':
 
     writer = csv.DictWriter(open(args.outfile, 'w'), ['lat', 'lon', 'nghd'])
 #        'tract', 'block_group', 'block'])
-    writer.writeheader()
+    writer.writerow({'lat': 'lat', 'lon': 'lon', 'nghd': 'nghd'})
+    # no writeheader in python 2.6
 
     counter = 0
     for lat in numpy.arange(37.6040, 37.8324, args.granularity):
