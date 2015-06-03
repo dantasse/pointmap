@@ -4,12 +4,12 @@
 
 import sys
 sys.path.insert(0, 'pointmap.zip')
-import geojson
-print geojson
-import fileinput, get_nghd
+import env.lib.geojson as geojson
+import fileinput, get_nghd, zipfile
 
-nghds = get_nghd.load_nghds('pointmap.zip/neighborhoods/neighborhoods.json')
-tracts = get_nghd.load_tracts('pointmap.zip/tracts/tracts.json')
+datafile = zipfile.ZipFile('pointmap.zip')
+nghds = get_nghd.load_nghds(datafile.open('neighborhoods/neighborhoods.json'))
+tracts = get_nghd.load_tracts(datafile.open('tracts/tracts.json'))
 for line in fileinput.input():
     lat = float(line.split(',')[0])
     lon = float(line.split(',')[1])
@@ -17,3 +17,4 @@ for line in fileinput.input():
     tract = get_nghd.get_tract_name(tracts, lon, lat)
     print ','.join((str(lat), str(lon), nghd, tract))
 
+datafile.close()
