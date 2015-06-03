@@ -26,8 +26,8 @@ def point_in_poly(x,y,poly):
         p1x,p1y = p2x,p2y
     return inside
 
-def load_nghds(neighborhoods_filename):
-    neighborhoods = geojson.load(open(neighborhoods_filename))
+def load_nghds(neighborhoods_file):
+    neighborhoods = geojson.load(neighborhoods_file)
     nghds = neighborhoods['features']
     for nghd in nghds:
         nghd['shape'] = nghd['geometry']['coordinates'][0]
@@ -61,8 +61,8 @@ def get_neighborhood_name(nghds, lon, lat):
             return nghd.properties['neighborho'] # not a typo.
     return 'Outside San Francisco'
 
-def load_tracts(tracts_filename):
-    tracts = geojson.load(open(tracts_filename))
+def load_tracts(tracts_file):
+    tracts = geojson.load(tracts_file)
     tracts = tracts['features']
     for tract in tracts:
         # tract['shape'] = shapely.geometry.asShape(tract['geometry'])

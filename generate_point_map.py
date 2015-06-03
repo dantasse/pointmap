@@ -20,8 +20,8 @@ if __name__ == '__main__':
     parser.add_argument('--outfile', '-o', default='point_map.csv')
     args = parser.parse_args()
 
-    nghds = get_nghd.load_nghds('neighborhoods/neighborhoods.json')
-    tracts = get_nghd.load_tracts('tracts/tracts.json')
+    nghds = get_nghd.load_nghds(open('neighborhoods/neighborhoods.json'))
+    tracts = get_nghd.load_tracts(open('tracts/tracts.json'))
 
     writer = csv.DictWriter(open(args.outfile, 'w'), ['lat', 'lon', 'nghd', 'tract'])
 #        'tract', 'block_group', 'block'])
