@@ -4,8 +4,7 @@
 
 import sys
 sys.path.insert(0, 'pointmap.zip')
-import env.lib.geojson as geojson
-import fileinput, get_nghd, zipfile
+import geojson, fileinput, get_nghd, zipfile
 
 datafile = zipfile.ZipFile('pointmap.zip')
 nghds = get_nghd.load_nghds(datafile.open('neighborhoods/neighborhoods.json'))
