@@ -11,5 +11,5 @@ for line in fileinput.input():
     lon = float(line.split(',')[1])
     nghd = get_nghd.get_neighborhood_name(nghds, lon, lat)
     tract = get_nghd.get_tract_name(tracts, lon, lat)
-    print ','.join((str(lat), str(lon), nghd, tract))
+    print ','.join((str(lat), str(lon), str(nghd), str(tract)))
 
