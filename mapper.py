@@ -2,10 +2,14 @@
 
 # Mapper for map-reduce building the pointmap.
 
+import sys
+sys.path.insert(0, 'pointmap.zip')
+import geojson
+print geojson
 import fileinput, get_nghd
 
-nghds = get_nghd.load_nghds('neighborhoods/neighborhoods.json')
-tracts = get_nghd.load_tracts('tracts/tracts.json')
+nghds = get_nghd.load_nghds('pointmap.zip/neighborhoods/neighborhoods.json')
+tracts = get_nghd.load_tracts('pointmap.zip/tracts/tracts.json')
 for line in fileinput.input():
     lat = float(line.split(',')[0])
     lon = float(line.split(',')[1])
