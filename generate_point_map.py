@@ -41,7 +41,7 @@ if __name__ == '__main__':
             lat = round(lat, 3)
             lon = round(lon, 3)
             nghd = get_nghd.get_neighborhood_name(nghds, lon, lat)
-            tract = get_nghd.get_tract_name(tracts, lat, lon)
+            tract = get_nghd.get_tract_name(tracts, lon, lat)
 #            group = util.census.get_group_ID(lat, lon)
 #            block = util.census.get_block_name(lat, lon)
 #            writer.writerow({'lat': lat, 'lon': lon, 'nghd': nghd,
