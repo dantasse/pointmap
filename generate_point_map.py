@@ -21,10 +21,11 @@ if __name__ == '__main__':
     args = parser.parse_args()
 
     nghds = get_nghd.load_nghds('neighborhoods/neighborhoods.json')
+    tracts = get_nghd.load_tracts('tracts/tracts.json')
 
-    writer = csv.DictWriter(open(args.outfile, 'w'), ['lat', 'lon', 'nghd'])
+    writer = csv.DictWriter(open(args.outfile, 'w'), ['lat', 'lon', 'nghd', 'tract'])
 #        'tract', 'block_group', 'block'])
-    writer.writerow({'lat': 'lat', 'lon': 'lon', 'nghd': 'nghd'})
+    writer.writerow({'lat': 'lat', 'lon': 'lon', 'nghd': 'nghd', 'tract': 'tract'})
     # no writeheader in python 2.6
 
     min_lat = args.min_lat
@@ -40,12 +41,12 @@ if __name__ == '__main__':
             lat = round(lat, 3)
             lon = round(lon, 3)
             nghd = get_nghd.get_neighborhood_name(nghds, lon, lat)
-            tract = get_tract_name(lat, lon)
+            tract = get_nghd.get_tract_name(tracts, lat, lon)
 #            group = util.census.get_group_ID(lat, lon)
 #            block = util.census.get_block_name(lat, lon)
 #            writer.writerow({'lat': lat, 'lon': lon, 'nghd': nghd,
 #                'tract': tract, 'block_group': group, 'block': block})
-            writer.writerow({'lat': lat, 'lon': lon, 'nghd': nghd})
+            writer.writerow({'lat': lat, 'lon': lon, 'nghd': nghd, 'tract': tract})
             counter += 1
             if counter % 1000 == 0:
                 print counter

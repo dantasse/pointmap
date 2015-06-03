@@ -44,7 +44,7 @@ def load_tracts(tracts_filename):
 
 # Returns a string that is the number of the tract that they're in, or -1 if
 # not in San Francisco.
-def get_tract_number(tracts, lon, lat):
+def get_tract_name(tracts, lon, lat):
     point = shapely.geometry.Point(lon, lat)
     for tract in tracts:
         if tract['shape'].contains(point):
