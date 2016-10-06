@@ -42,7 +42,7 @@ if __name__ == '__main__':
         nghd['bounds'] = nghd['shape'].bounds
     overall_shape = shapely.ops.cascaded_union([n['shape'] for n in nghds])
     (min_lon, min_lat, max_lon, max_lat) = overall_shape.bounds
-    
+
     num_pts = ((max_lon - min_lon)/args.granularity) * ((max_lat - min_lat)/args.granularity)
     print "Number of points to calculate: " + str(round(num_pts))
 
