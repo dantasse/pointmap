@@ -14,8 +14,8 @@ import shapely.ops, multiprocessing, time
 def init_worker(args):
     nghds = args[0] # Each process gets a version of the nghds to use later.
 
-def get_nghd_name(args):
-    lat, lon = args
+def get_nghd_name(latlon):
+    lat, lon = latlon
     point = shapely.geometry.Point(lon, lat)
     for nghd in nghds:
         bounds = nghd['bounds']
@@ -26,7 +26,7 @@ def get_nghd_name(args):
         if point.within(nghd['shape']):
             # nghds.remove(nghd) # future optimization if necessary
             # nghds.insert(0, nghd)
-            return [lat, lon, nghd['properties']['hood']]
+            return [lat, lon, nghd['properties'][args.nghd_param_name]]
             # 'hood' is for pgh_neighborhoods.geojson only.
     return [lat, lon, 'None']
 
@@ -34,6 +34,7 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('--neighborhoods_file', default='neighborhoods/pgh_neighborhoods.geojson')
     parser.add_argument('--num_processes', type=int, default=multiprocessing.cpu_count())
+    parser.add_argument('--nghd_param_name', default='hood', help='what field in the geojson properties means "the neighborhood name"')
     parser.add_argument('--output_file', '-o', default='point_map.csv')
     args = parser.parse_args()
 
